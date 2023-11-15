@@ -37,8 +37,8 @@ export class MultiSelectorComponent {
 
   onSelectionChange() {
     const selectedOptions = this.facet.options
-      .filter((option) => option.selected)
-      .map((option) => option.name);
+      .filter((opt) => opt.selected)
+      .map((opt) => opt.name);
 
     this.facetChanged.emit({
       name: this.facet.name,

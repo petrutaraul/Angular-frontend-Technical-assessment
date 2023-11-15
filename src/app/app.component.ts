@@ -54,7 +54,7 @@ export class AppComponent implements OnDestroy {
       name: 'countries',
       options: [
         { name: 'United States', selected: false },
-        { name: 'Canada', selected: false },
+        { name: 'Canada', selected: true },
         { name: 'Mexico', selected: false },
       ],
     },

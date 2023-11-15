@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MultiSelectorComponent } from './components/multi-selector/multi-selector.component';
@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ReusableSearchComponentService } from './reusable-search-component.service';
+import { MultiSelectorOption } from './components/multi-selector/IMultiSelector';
 
 @Component({
   selector: 'app-reusable-search-component',
@@ -26,7 +27,7 @@ import { ReusableSearchComponentService } from './reusable-search-component.serv
   ],
   templateUrl: './reusable-search-component.component.html',
 })
-export class ReusableSearchComponentComponent {
+export class ReusableSearchComponentComponent implements OnInit {
   constructor(private searchService: ReusableSearchComponentService) {}
 
   @Input() minLength: number = 2;
@@ -37,6 +38,19 @@ export class ReusableSearchComponentComponent {
   searchTerm: string = '';
   selectedFacets: any = {};
 
+  ngOnInit() {
+    this.facets.forEach((facet) => {
+      if (facet.type === 'radio' || facet.type === 'value') {
+        this.selectedFacets[facet.name] =
+          facet.selectedOption || facet.selectedValue;
+      } else if (facet.type === 'multi') {
+        this.selectedFacets[facet.name] = facet.options
+          .filter((option: MultiSelectorOption) => option.selected)
+          .map((option: MultiSelectorOption) => option.name);
+      }
+    });
+  }
+
   onFacetChange(facetName: string, selectedOption: any) {
     console.log(facetName, selectedOption);
 
@@ -44,6 +58,19 @@ export class ReusableSearchComponentComponent {
   }
 
   performSearch(): void {
+    this.facets.forEach((facet) => {
+      if (!(facet.name in this.selectedFacets)) {
+        if (facet.type === 'radio' || facet.type === 'value') {
+          this.selectedFacets[facet.name] =
+            facet.selectedOption || facet.selectedValue;
+        } else if (facet.type === 'multi') {
+          this.selectedFacets[facet.name] = facet.options
+            .filter((option: MultiSelectorOption) => option.selected)
+            .map((option: MultiSelectorOption) => option.name);
+        }
+      }
+    });
+
     if (this.searchTerm.length >= this.minLength) {
       this.searchService.triggerSearch({
         searchTerm: this.searchTerm,
