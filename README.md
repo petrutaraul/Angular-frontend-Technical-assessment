@@ -1,6 +1,6 @@
 # 🚀 Technical Assessment Angular Raul Petruta 🚀
 
-Welcome to the wildest Angular project in the digital jungle! 🌴 This masterpiece was conjured up with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.4, which is pretty much the wizard's wand of web development. ✨
+Welcome to the wildest Angular project in the digital jungle! 🌴 This masterpiece was conjured up with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.0, which is pretty much the wizard's wand of web development. ✨
 
 ## 🏎️ Development Server: Zoom Zoom!
 
