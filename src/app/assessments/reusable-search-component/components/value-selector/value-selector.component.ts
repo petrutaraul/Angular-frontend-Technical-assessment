@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ValueSelectorOption } from './IValueSelector';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { IEmittedFacet } from 'src/app/interfaces/IEmittedFacet';
 
 @Component({
   selector: 'app-value-selector',
@@ -24,7 +25,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
       >
       <mat-form-field appearance="outline">
         <mat-label>{{ facet.name }}</mat-label>
-        <mat-select [(ngModel)]="facet.selectedValue" [name]="facet.name">
+        <mat-select
+          [(ngModel)]="facet.selectedValue"
+          [name]="facet.name"
+          (selectionChange)="onValueChange()"
+        >
           <mat-option *ngFor="let value of facet.values" [value]="value.value">
             {{ value.label }}
           </mat-option>
@@ -39,4 +44,13 @@ export class ValueSelectorComponent {
     values: ValueSelectorOption[];
     selectedValue: string;
   };
+
+  @Output() facetChanged = new EventEmitter<IEmittedFacet>();
+
+  onValueChange() {
+    this.facetChanged.emit({
+      name: this.facet.name,
+      selectedOption: this.facet.selectedValue,
+    });
+  }
 }

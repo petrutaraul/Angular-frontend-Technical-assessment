@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
+import { IEmittedFacet } from 'src/app/interfaces/IEmittedFacet';
 
 @Component({
   selector: 'app-radio-button-selector',
@@ -31,8 +32,12 @@ export class RadioButtonSelectorComponent {
     selectedOption: string;
   };
   @Output() selectionChanged = new EventEmitter<string>();
+  @Output() facetChanged = new EventEmitter<IEmittedFacet>();
 
   onSelectionChange() {
-    this.selectionChanged.emit(this.facet.selectedOption);
+    this.facetChanged.emit({
+      name: this.facet.name,
+      selectedOption: this.facet.selectedOption,
+    });
   }
 }

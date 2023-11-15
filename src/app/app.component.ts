@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { NgSwitch, NgSwitchDefault, NgSwitchCase } from '@angular/common';
 import { RetryableBackendOperationComponent } from './assessments/retryable-backend-operation/retryable-backend-operation.component';
 import { ReusableSearchComponentComponent } from './assessments/reusable-search-component/reusable-search-component.component';
+import { Subject, takeUntil } from 'rxjs';
+import { ReusableSearchComponentService } from './assessments/reusable-search-component/reusable-search-component.service';
 
 @Component({
   selector: 'app-root',
@@ -18,8 +20,27 @@ import { ReusableSearchComponentComponent } from './assessments/reusable-search-
     ReusableSearchComponentComponent,
   ],
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
   title = 'technical-assessment-angular-raul-petruta';
+
+  private destroy$ = new Subject<void>();
+
+  constructor(private searchService: ReusableSearchComponentService) {
+    this.searchService.searchTriggered$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((searchData) => {
+        this.handleSearch(searchData);
+      });
+  }
+
+  handleSearch(searchData: { searchTerm: string; selectedFacets: any }): void {
+    console.log('calling search service with search data: ', searchData);
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   facets = [
     {

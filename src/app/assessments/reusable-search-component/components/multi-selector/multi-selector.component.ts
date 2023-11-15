@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MultiSelectorOption } from './IMultiSelector';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
+import { IEmittedFacet } from 'src/app/interfaces/IEmittedFacet';
 
 @Component({
   selector: 'app-multi-selector',
@@ -18,6 +19,7 @@ import { MatInputModule } from '@angular/material/input';
         <mat-checkbox
           *ngFor="let option of facet.options"
           [(ngModel)]="option.selected"
+          (change)="onSelectionChange()"
         >
           {{ option.name }}
         </mat-checkbox>
@@ -30,4 +32,17 @@ export class MultiSelectorComponent {
     name: string;
     options: MultiSelectorOption[];
   };
+
+  @Output() facetChanged = new EventEmitter<IEmittedFacet>();
+
+  onSelectionChange() {
+    const selectedOptions = this.facet.options
+      .filter((option) => option.selected)
+      .map((option) => option.name);
+
+    this.facetChanged.emit({
+      name: this.facet.name,
+      selectedOptions: selectedOptions,
+    });
+  }
 }

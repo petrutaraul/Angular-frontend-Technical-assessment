@@ -8,6 +8,7 @@
         [placeholder]="searchPlaceholder"
         [maxlength]="maxLength"
         [minlength]="minLength"
+        (keyup.enter)="performSearch()"
       />
       <button matSuffix mat-icon-button aria-label="search">
         <mat-icon>search</mat-icon>
@@ -22,14 +23,17 @@
         <app-radio-button-selector
           *ngSwitchCase="'radio'"
           [facet]="facet"
+          (facetChanged)="onFacetChange(facet.name, $event)"
         ></app-radio-button-selector>
         <app-multi-selector
           [facet]="facet"
           *ngSwitchCase="'multi'"
+          (facetChanged)="onFacetChange(facet.name, $event)"
         ></app-multi-selector>
         <app-value-selector
           [facet]="facet"
           *ngSwitchCase="'value'"
+          (facetChanged)="onFacetChange(facet.name, $event)"
         ></app-value-selector>
       </ng-container>
     </ng-container>
