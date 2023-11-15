@@ -1,4 +1,28 @@
-<app-retryable-backend-operation></app-retryable-backend-operation>
-<app-reusable-search-component
-  [facets]="facets"
-></app-reusable-search-component>
+<div class="flex flex-col justify-center items-center">
+  <div class="flex flex-col justify-center items-center">
+    <h2>Assessment 1 - Retryable backend operation</h2>
+    <app-retryable-backend-operation
+      class="py-8"
+    ></app-retryable-backend-operation>
+  </div>
+
+  <div class="grid gap-4">
+    <h2>Assessment 2 - Reusable search component</h2>
+    <div>
+      <h3>Facets with radio</h3>
+      <app-reusable-search-component
+        [facets]="facetsWithRadio"
+      ></app-reusable-search-component>
+      <div class="text-red-600">{{ selectedFacetsWithRadioData | json }}</div>
+    </div>
+    <div>
+      <h3>Facets with multi and select</h3>
+      <app-reusable-search-component
+        [facets]="facetsWithMultiAndSelect"
+      ></app-reusable-search-component>
+      <div class="text-red-600">
+        {{ selectedFacetsWithMultiAndSelectData | json }}
+      </div>
+    </div>
+  </div>
+</div>

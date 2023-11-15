@@ -52,8 +52,6 @@ export class ReusableSearchComponentComponent implements OnInit {
   }
 
   onFacetChange(facetName: string, selectedOption: any) {
-    console.log(facetName, selectedOption);
-
     this.selectedFacets[facetName] = selectedOption;
   }
 
