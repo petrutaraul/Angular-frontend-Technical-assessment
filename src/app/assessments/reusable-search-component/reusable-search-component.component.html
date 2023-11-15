@@ -1,0 +1,37 @@
+<div class="search-widget" class="flex flex-col w-96">
+  <div>
+    <mat-form-field appearance="outline" class="w-full">
+      <input
+        matInput
+        type="text"
+        [(ngModel)]="searchTerm"
+        [placeholder]="searchPlaceholder"
+        [maxlength]="maxLength"
+        [minlength]="minLength"
+      />
+      <button matSuffix mat-icon-button aria-label="search">
+        <mat-icon>search</mat-icon>
+      </button>
+      <mat-hint class="text-stone-300">Press enter to search</mat-hint>
+    </mat-form-field>
+  </div>
+
+  <div class="pl-8">
+    <ng-container *ngFor="let facet of facets">
+      <ng-container [ngSwitch]="facet.type">
+        <app-radio-button-selector
+          *ngSwitchCase="'radio'"
+          [facet]="facet"
+        ></app-radio-button-selector>
+        <app-multi-selector
+          [facet]="facet"
+          *ngSwitchCase="'multi'"
+        ></app-multi-selector>
+        <app-value-selector
+          [facet]="facet"
+          *ngSwitchCase="'value'"
+        ></app-value-selector>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

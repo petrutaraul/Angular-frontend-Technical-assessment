@@ -1,0 +1,7 @@
+<div *ngIf="data$ | async as data">
+  <div *ngIf="data.ready; else loading">
+    <p>Data: {{ data.data }}</p>
+  </div>
+
+  <ng-template #loading> Data is not ready. </ng-template>
+</div>
