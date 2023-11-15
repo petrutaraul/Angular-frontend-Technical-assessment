@@ -1,11 +1,11 @@
-# TechnicalAssessmentAngularRaulPetruta
+# 🚀 Technical Assessment Angular Raul Petruta 🚀
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.4.
+Welcome to the wildest Angular project in the digital jungle! 🌴 This masterpiece was conjured up with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.4, which is pretty much the wizard's wand of web development. ✨
 
-## Development server
+## 🏎️ Development Server: Zoom Zoom!
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`
+Fire up your engines with `ng serve` and race over to `http://localhost:4200/`. Warning: Speeds may exceed your coding expectations! 🏁
 
-## Install
+## 📦 Install: Unleash the Magic!
 
-Run `npm install`
+Just run `npm install` and watch the magic unfold! It's like giving your project a super potion. 🧪💥
